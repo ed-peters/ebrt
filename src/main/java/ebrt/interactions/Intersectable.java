@@ -1,7 +1,7 @@
-package attic;
+package ebrt.interactions;
 
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Ray;
 
 public interface Intersectable {
 

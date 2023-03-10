@@ -1,11 +1,11 @@
-package attic.shapes;
+package ebrt.shapes;
 
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Normal3d;
-import attic.math.Point3d;
-import attic.math.Ray;
-import attic.math.Transform;
-import attic.math.Vector3d;
+import ebrt.math.Normal3d;
+import ebrt.math.Point3d;
+import ebrt.math.Transform;
+import ebrt.math.Vector3d;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

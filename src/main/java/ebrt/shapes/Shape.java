@@ -1,20 +1,22 @@
-package attic.shapes;
+package ebrt.shapes;
 
-import attic.Intersectable;
+import ebrt.interactions.Intersectable;
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Bounds3d;
-import attic.math.Ray;
-import attic.math.Transform;
+import ebrt.math.Bounds3d;
+import ebrt.math.Transform;
 
 public abstract class Shape implements Intersectable {
 
     private final Transform objectToWorld;
+    private final Transform worldToObject;
     private final Bounds3d objectBounds;
     private final boolean reverse;
     private final boolean transformSwapsHands;
 
     public Shape(Transform objectToWorld, Bounds3d objectBounds, boolean reverse) {
         this.objectToWorld = objectToWorld;
+        this.worldToObject = objectToWorld.invert();
         this.objectBounds = objectBounds;
         this.reverse = reverse;
         this.transformSwapsHands = objectToWorld.swapsHandedness();
@@ -33,12 +35,12 @@ public abstract class Shape implements Intersectable {
     }
 
     public Bounds3d worldBounds() {
-        return objectToWorld.forward(objectBounds);
+        return objectBounds.transform(objectToWorld);
     }
 
     public final SurfaceInteraction intersect(Ray worldRay, double tmax, boolean testAlpha) {
-        SurfaceInteraction result = intersectObject(objectToWorld.reverse(worldRay), tmax, testAlpha);
-        return result == null ? null : objectToWorld.forward(result);
+        SurfaceInteraction result = intersectObject(worldRay.transform(worldToObject), tmax, testAlpha);
+        return result == null ? null : result.transform(objectToWorld);
     }
 
     protected abstract SurfaceInteraction intersectObject(Ray objectRay, double tmax, boolean testAlpha);

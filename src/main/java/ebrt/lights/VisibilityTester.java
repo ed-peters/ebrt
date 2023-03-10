@@ -1,11 +1,11 @@
-package attic.lights;
+package ebrt.lights;
 
 import ebrt.Color;
-import attic.Scene;
+import ebrt.Scene;
 import ebrt.interactions.Interaction;
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Ray;
-import attic.samplers.Sampler;
+import ebrt.samplers.Sampler;
 
 public record VisibilityTester(Interaction p0, Interaction p1) {
 

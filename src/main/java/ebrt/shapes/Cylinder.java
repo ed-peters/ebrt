@@ -1,15 +1,15 @@
-package attic.shapes;
+package ebrt.shapes;
 
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Bounds3d;
-import attic.math.Hits;
-import attic.math.Normal3d;
-import attic.math.Point3d;
-import attic.math.Ray;
-import attic.math.Transform;
-import attic.math.Utils;
+import ebrt.math.Bounds3d;
+import ebrt.math.Hits;
+import ebrt.math.Normal3d;
+import ebrt.math.Point3d;
+import ebrt.math.Transform;
+import ebrt.math.Utils;
 
-import static attic.math.Utils.TAU;
+import static ebrt.math.Utils.TAU;
 
 public class Cylinder extends Shape {
 

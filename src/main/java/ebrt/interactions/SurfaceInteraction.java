@@ -5,14 +5,16 @@ import ebrt.math.Normal3d;
 import ebrt.math.Point3d;
 import ebrt.math.Transform;
 import ebrt.math.Vector3d;
+import ebrt.primitives.Primitive;
+import ebrt.shapes.Shape;
 
 public final class SurfaceInteraction extends Interaction {
 
     public final double u;
     public final double v;
 
-    public final Object shape;
-    private Object primitive;
+    public final Shape shape;
+    private Primitive primitive;
     private Object bsdf;
 
     public SurfaceInteraction(
@@ -22,14 +24,14 @@ public final class SurfaceInteraction extends Interaction {
             double t,
             double u,
             double v,
-            Object shape) {
+            Shape shape) {
         super(point, normal, wo, t);
         this.u = u;
         this.v = v;
         this.shape = shape;
     }
 
-    public Object primitive() {
+    public Primitive primitive() {
         return primitive;
     }
 
@@ -37,7 +39,7 @@ public final class SurfaceInteraction extends Interaction {
         return bsdf;
     }
 
-    public void setPrimitive(Object primitive) {
+    public void setPrimitive(Primitive primitive) {
         this.primitive = primitive;
     }
 
@@ -82,7 +84,7 @@ public final class SurfaceInteraction extends Interaction {
         private double t;
         private double u;
         private double v;
-        private Object shape;
+        private Shape shape;
 
         public Builder withPoint(Point3d point) {
             this.point = point;
@@ -110,7 +112,7 @@ public final class SurfaceInteraction extends Interaction {
             return this;
         }
 
-        public Builder withShape(Object shape) {
+        public Builder withShape(Shape shape) {
             this.shape = shape;
             return this;
         }

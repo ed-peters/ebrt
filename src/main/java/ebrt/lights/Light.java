@@ -1,10 +1,10 @@
-package attic.lights;
+package ebrt.lights;
 
 import ebrt.Color;
-import attic.Scene;
+import ebrt.Scene;
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Point2d;
-import attic.math.Ray;
+import ebrt.math.Point2d;
 
 public interface Light {
 

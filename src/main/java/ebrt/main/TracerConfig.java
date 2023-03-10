@@ -1,7 +1,7 @@
-package attic.riow;
+package ebrt.main;
 
-import attic.math.Point3d;
-import attic.math.Vector3d;
+import ebrt.math.Point3d;
+import ebrt.math.Vector3d;
 
 public final class TracerConfig {
 

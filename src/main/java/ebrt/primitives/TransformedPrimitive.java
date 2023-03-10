@@ -1,11 +1,11 @@
-package attic.primitives;
+package ebrt.primitives;
 
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.lights.AreaLight;
-import attic.material.Material;
-import attic.math.Bounds3d;
-import attic.math.Ray;
-import attic.math.Transform;
+import ebrt.lights.AreaLight;
+import ebrt.material.Material;
+import ebrt.math.Bounds3d;
+import ebrt.math.Transform;
 
 public class TransformedPrimitive implements Primitive {
 
@@ -19,7 +19,8 @@ public class TransformedPrimitive implements Primitive {
 
     @Override
     public Bounds3d worldBound() {
-        return worldToPrimitive.reverse(target.worldBound());
+        // TODO is this correct?
+        return target.worldBound().transform(worldToPrimitive.invert());
     }
 
     @Override

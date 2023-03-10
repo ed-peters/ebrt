@@ -1,17 +1,17 @@
-package attic.riow;
+package ebrt.main;
 
 import ebrt.Color;
-import attic.camera.Film;
+import ebrt.camera.Film;
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.math.Normal3d;
-import attic.math.Point2i;
-import attic.math.Point3d;
-import attic.math.Ray;
-import attic.math.Vector3d;
-import attic.primitives.GeometricPrimitive;
-import attic.primitives.Primitive;
-import attic.primitives.PrimitiveList;
-import attic.shapes.Sphere;
+import ebrt.math.Normal3d;
+import ebrt.math.Point2i;
+import ebrt.math.Point3d;
+import ebrt.math.Vector3d;
+import ebrt.primitives.GeometricPrimitive;
+import ebrt.primitives.Primitive;
+import ebrt.primitives.PrimitiveList;
+import ebrt.shapes.Sphere;
 
 public class Tracer {
 

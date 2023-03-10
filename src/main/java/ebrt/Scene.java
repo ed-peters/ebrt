@@ -1,9 +1,10 @@
-package attic;
+package ebrt;
 
+import ebrt.interactions.Intersectable;
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.lights.Light;
-import attic.math.Ray;
-import attic.primitives.Primitive;
+import ebrt.lights.Light;
+import ebrt.primitives.Primitive;
 
 import java.util.List;
 

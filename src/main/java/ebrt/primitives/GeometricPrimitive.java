@@ -1,12 +1,12 @@
-package attic.primitives;
+package ebrt.primitives;
 
+import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
-import attic.lights.AreaLight;
-import attic.material.Material;
-import attic.math.Bounds3d;
-import attic.math.Ray;
+import ebrt.lights.AreaLight;
+import ebrt.material.Material;
+import ebrt.math.Bounds3d;
 import ebrt.media.MediumInterface;
-import attic.shapes.Shape;
+import ebrt.shapes.Shape;
 
 public class GeometricPrimitive implements Primitive {
 

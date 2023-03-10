@@ -1,4 +1,4 @@
-package attic.material;
+package ebrt.material;
 
 public interface Material {
 }

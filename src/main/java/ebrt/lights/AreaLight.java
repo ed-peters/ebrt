@@ -1,4 +1,4 @@
-package attic.lights;
+package ebrt.lights;
 
 public interface AreaLight {
 }
