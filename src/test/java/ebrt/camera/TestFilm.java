@@ -1,10 +1,10 @@
-package attic.camera;
+package ebrt.camera;
 
 import ebrt.Color;
-import attic.filters.BoxFilter;
-import attic.math.Bounds2d;
-import attic.math.Point2d;
-import attic.math.Point2i;
+import ebrt.filters.BoxFilter;
+import ebrt.math.Bounds2d;
+import ebrt.math.Point2d;
+import ebrt.math.Point2i;
 import org.junit.Test;
 
 public class TestFilm {
@@ -18,6 +18,6 @@ public class TestFilm {
             double b = 1.0;
             film.splat(new Point2i(x, y), new Color(r, g, b));
         });
-        film.writeToFile(1.0, "/Users/QBX490/Desktop/film.png");
+        film.writeToFile(1.0, "/Users/ed.peters/Desktop/film.png");
     }
 }

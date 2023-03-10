@@ -1,12 +1,12 @@
-package attic.camera;
+package ebrt.camera;
 
 import ebrt.Color;
-import attic.filters.BoxFilter;
-import attic.filters.Filter;
-import attic.math.Bounds2d;
-import attic.math.Bounds2i;
-import attic.math.Point2d;
-import attic.math.Point2i;
+import ebrt.filters.BoxFilter;
+import ebrt.filters.Filter;
+import ebrt.math.Bounds2d;
+import ebrt.math.Bounds2i;
+import ebrt.math.Point2d;
+import ebrt.math.Point2i;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

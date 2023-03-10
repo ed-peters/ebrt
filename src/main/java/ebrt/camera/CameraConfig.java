@@ -1,7 +1,7 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Bounds2d;
-import attic.math.Transform;
+import ebrt.math.Bounds2d;
+import ebrt.math.Transform;
 import ebrt.media.Medium;
 
 public class CameraConfig {

@@ -1,12 +1,12 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Bounds2i;
-import attic.math.Ray;
-import attic.math.RayDifferential;
-import attic.math.Transform;
-import attic.math.Weighted;
+import ebrt.math.Bounds2i;
+import ebrt.math.Transform;
+import ebrt.math.Weighted;
+import ebrt.interactions.Ray;
+import ebrt.interactions.RayDifferential;
 import ebrt.media.Medium;
-import attic.samplers.CameraSample;
+import ebrt.samplers.CameraSample;
 
 public abstract class Camera {
 

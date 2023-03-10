@@ -1,6 +1,6 @@
-package attic.filters;
+package ebrt.filters;
 
-import attic.math.Point2d;
+import ebrt.math.Point2d;
 
 public class MitchellFilter extends Filter {
 

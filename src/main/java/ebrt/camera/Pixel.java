@@ -1,4 +1,4 @@
-package attic.camera;
+package ebrt.camera;
 
 import ebrt.Color;
 

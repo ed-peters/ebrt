@@ -1,13 +1,13 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Bounds2d;
-import attic.math.Point2d;
-import attic.math.Point3d;
-import attic.math.Projections;
-import attic.math.Ray;
-import attic.math.Transform;
+import ebrt.interactions.Ray;
+import ebrt.math.Bounds2d;
+import ebrt.math.Point2d;
+import ebrt.math.Point3d;
+import ebrt.math.Projections;
+import ebrt.math.Transform;
 import ebrt.media.Medium;
-import attic.samplers.CameraSample;
+import ebrt.samplers.CameraSample;
 
 /**
  * Three coordinate systems:
@@ -61,7 +61,7 @@ public abstract class ProjectiveCamera extends Camera {
 
     protected RayParts makeRayParts(CameraSample sample) {
 
-        Point3d camera = rasterToCamera.forward(sample.film().toPoint3d());
+        Point3d camera = sample.film().toPoint3d().transform(rasterToCamera);
         Ray ray = new Ray(Point3d.ORIGIN, camera.toVector3d().normalize());
         if (lensRadius <= 0) {
             return new RayParts(camera, ray, null, null, 0);

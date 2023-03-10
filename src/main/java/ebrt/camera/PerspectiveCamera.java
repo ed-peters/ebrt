@@ -1,15 +1,15 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Bounds2d;
-import attic.math.Point3d;
-import attic.math.Projections;
-import attic.math.Ray;
-import attic.math.RayDifferential;
-import attic.math.Transform;
-import attic.math.Vector3d;
-import attic.math.Weighted;
+import ebrt.interactions.Ray;
+import ebrt.interactions.RayDifferential;
+import ebrt.math.Bounds2d;
+import ebrt.math.Point3d;
+import ebrt.math.Projections;
+import ebrt.math.Transform;
+import ebrt.math.Vector3d;
+import ebrt.math.Weighted;
 import ebrt.media.Medium;
-import attic.samplers.CameraSample;
+import ebrt.samplers.CameraSample;
 
 public class PerspectiveCamera extends ProjectiveCamera {
 
@@ -29,14 +29,14 @@ public class PerspectiveCamera extends ProjectiveCamera {
 
         super(cameraToWorld, Projections.perspective(fieldOfView), screenWindow, lensRadius, focalDistance, medium, film);
 
-        Vector3d o = rasterToCamera().forward(Vector3d.ZERO);
-        Vector3d x = rasterToCamera().forward(new Vector3d(1, 0, 0));
-        Vector3d y = rasterToCamera().forward(new Vector3d(0, 1, 0));
+        Vector3d o = Vector3d.ZERO.transform(rasterToCamera());
+        Vector3d x = Vector3d.X.transform(rasterToCamera());
+        Vector3d y = Vector3d.Y.transform(rasterToCamera());
         this.cameraX = x.minus(o);
         this.cameraY = y.minus(o);
 
-        Point3d min = rasterToCamera().forward(Point3d.ORIGIN);
-        Point3d max = rasterToCamera().forward(film.resolution().toPoint3d());
+        Point3d min = Point3d.ORIGIN.transform(rasterToCamera());
+        Point3d max = film.resolution().toPoint3d().transform(rasterToCamera());
         min = min.div(min.z());
         max = max.div(max.z());
         this.a = Math.abs((max.x() - min.x()) * (max.y()) - min.y());
@@ -75,6 +75,6 @@ public class PerspectiveCamera extends ProjectiveCamera {
         }
 
         RayDifferential rd = new RayDifferential(parts.ray(), true, rox, roy, rdx, rdy);
-        return new Weighted<>(cameraToWorld().forward(rd), 1);
+        return new Weighted<>(rd.transform(cameraToWorld()), 1);
     }
 }

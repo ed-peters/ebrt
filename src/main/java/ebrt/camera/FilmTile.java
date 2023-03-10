@@ -1,10 +1,10 @@
-package attic.camera;
+package ebrt.camera;
 
 import ebrt.Color;
-import attic.filters.Filter;
-import attic.math.Bounds2i;
-import attic.math.Point2d;
-import attic.math.Point2i;
+import ebrt.filters.Filter;
+import ebrt.math.Bounds2i;
+import ebrt.math.Point2d;
+import ebrt.math.Point2i;
 
 public class FilmTile {
 

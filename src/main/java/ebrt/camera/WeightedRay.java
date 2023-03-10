@@ -1,6 +1,6 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.RayDifferential;
+import ebrt.interactions.RayDifferential;
 
 public record WeightedRay(RayDifferential ray, double weight) {
 }

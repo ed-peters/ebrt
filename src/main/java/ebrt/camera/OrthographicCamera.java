@@ -1,15 +1,15 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Bounds2d;
-import attic.math.Point3d;
-import attic.math.Projections;
-import attic.math.Ray;
-import attic.math.RayDifferential;
-import attic.math.Transform;
-import attic.math.Vector3d;
-import attic.math.Weighted;
+import ebrt.interactions.Ray;
+import ebrt.interactions.RayDifferential;
+import ebrt.math.Bounds2d;
+import ebrt.math.Point3d;
+import ebrt.math.Projections;
+import ebrt.math.Transform;
+import ebrt.math.Vector3d;
+import ebrt.math.Weighted;
 import ebrt.media.Medium;
-import attic.samplers.CameraSample;
+import ebrt.samplers.CameraSample;
 
 public class OrthographicCamera extends ProjectiveCamera {
 
@@ -24,14 +24,14 @@ public class OrthographicCamera extends ProjectiveCamera {
             Medium medium,
             Film film) {
         super(cameraToWorld, Projections.orthographic(0, 1), screenWindow, lensRadius, focalDistance, medium, film);
-        dx = rasterToCamera().forward(Vector3d.X);
-        dy = rasterToCamera().forward(Vector3d.Y);
+        dx = Vector3d.X.transform(rasterToCamera());
+        dy = Vector3d.Y.transform(rasterToCamera());
     }
 
     @Override
     public Weighted<Ray> makeRay(CameraSample sample) {
         RayParts parts = makeRayParts(sample);
-        return new Weighted<>(cameraToWorld().forward(parts.ray()), 1);
+        return new Weighted<>(parts.ray().transform(cameraToWorld()), 1);
     }
 
     @Override
@@ -59,6 +59,6 @@ public class OrthographicCamera extends ProjectiveCamera {
         }
 
         RayDifferential rd = new RayDifferential(parts.ray(), true, rox, roy, rdx, rdy);
-        return new Weighted<>(cameraToWorld().forward(rd), 1);
+        return new Weighted<>(rd.transform(cameraToWorld()), 1);
     }
 }

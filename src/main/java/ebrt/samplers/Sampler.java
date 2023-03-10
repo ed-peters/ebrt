@@ -1,7 +1,7 @@
-package attic.samplers;
+package ebrt.samplers;
 
-import attic.math.Point2d;
-import attic.math.Point2i;
+import ebrt.math.Point2d;
+import ebrt.math.Point2i;
 
 public interface Sampler {
 

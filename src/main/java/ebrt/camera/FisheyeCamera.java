@@ -1,13 +1,13 @@
-package attic.camera;
+package ebrt.camera;
 
-import attic.math.Point3d;
-import attic.math.Ray;
-import attic.math.Transform;
-import attic.math.Utils;
-import attic.math.Vector3d;
-import attic.math.Weighted;
+import ebrt.interactions.Ray;
+import ebrt.math.Point3d;
+import ebrt.math.Transform;
+import ebrt.math.Utils;
+import ebrt.math.Vector3d;
+import ebrt.math.Weighted;
 import ebrt.media.Medium;
-import attic.samplers.CameraSample;
+import ebrt.samplers.CameraSample;
 
 public class FisheyeCamera extends Camera {
 
@@ -27,6 +27,6 @@ public class FisheyeCamera extends Camera {
         double sp = Math.sin(phi);
 
         Vector3d dir = new Vector3d(st * cp, ct, st * sp);
-        return new Weighted<>(cameraToWorld().forward(new Ray(Point3d.ORIGIN, dir)), 1);
+        return new Weighted<>(new Ray(Point3d.ORIGIN, dir).transform(cameraToWorld()), 1);
     }
 }
