@@ -57,6 +57,13 @@ public record Bounds3d(Point3d min, Point3d max) {
         return corners;
     }
 
+    public Bounds3d transform(Transform transform) {
+        List<Point3d> corners = corners().stream()
+                .map(p -> p.transform(transform))
+                .collect(Collectors.toList());
+        return around(corners);
+    }
+
     public static Bounds3d around(Point3d... points) {
         return around(Arrays.asList(points));
     }

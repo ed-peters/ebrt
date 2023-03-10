@@ -21,7 +21,7 @@ public class TestProjections {
         Point2i resolution = new Point2i(640, 480);
         Bounds2d screenWindow = new Bounds2d(new Point2d(-100, -100), new Point2d(100, 100));
         Transform screenToRaster = Projections.screenToRaster(resolution, screenWindow);
-        Point3d actual0 = screenToRaster.forward(new Point3d(65, 65, 10));
+        Point3d actual0 = new Point3d(65, 65, 10).transform(screenToRaster);
         Point3d expected0 = new Point3d(528, 84, 10);
         assertEquals(expected0, actual0);
     }

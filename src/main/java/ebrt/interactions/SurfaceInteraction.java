@@ -3,6 +3,7 @@ package ebrt.interactions;
 import ebrt.Color;
 import ebrt.math.Normal3d;
 import ebrt.math.Point3d;
+import ebrt.math.Transform;
 import ebrt.math.Vector3d;
 
 public final class SurfaceInteraction extends Interaction {
@@ -50,6 +51,13 @@ public final class SurfaceInteraction extends Interaction {
 
     public Color le(Vector3d wo) {
         throw new UnsupportedOperationException();
+    }
+
+    public SurfaceInteraction transform(Transform t) {
+        return build(this)
+                .withPoint(point.transform(t))
+                .withNormal(normal.transform(t))
+                .build();
     }
 
     public static Builder build() {

@@ -52,4 +52,12 @@ public record Normal3d(double x, double y, double z) {
     public Vector3d toVector3d() {
         return new Vector3d(x, y, z);
     }
+
+    public Normal3d transform(Transform t) {
+        double [][] m = t.matrix();
+        return new Normal3d(
+                m[0][0]*x + m[0][1]*y + m[0][2]*z,
+                m[1][0]*x + m[1][1]*y + m[1][2]*z,
+                m[2][0]*x + m[2][1]*y + m[2][2]*z);
+    }
 }

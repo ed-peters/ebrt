@@ -119,6 +119,14 @@ public record Vector3d(double x, double y, double z) {
                 && abs(z - other.z) < 1e-6;
     }
 
+    public Vector3d transform(Transform t) {
+        double [][] m = t.matrix();
+        return new Vector3d(
+                m[0][0]*x + m[0][1]*y + m[0][2]*z,
+                m[1][0]*x + m[1][1]*y + m[1][2]*z,
+                m[2][0]*x + m[2][1]*y + m[2][2]*z);
+    }
+
     // =================================================================================
     // spherical coords
     // =================================================================================

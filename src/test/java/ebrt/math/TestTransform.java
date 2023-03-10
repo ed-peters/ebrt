@@ -66,18 +66,18 @@ public class TestTransform {
     }
 
     private void assertTransformWorks(Transform t, Vector3d o, Vector3d f) {
-        assertVector3dEquals("forward fails", f, t.forward(o));
-        assertVector3dEquals("reverse fails", o, t.reverse(f));
+        assertVector3dEquals("forward fails", f, o.transform(t));
+        assertVector3dEquals("reverse fails", o, f.transform(t.invert()));
     }
 
     private void assertTransformWorks(Transform t, Point3d o, Point3d f) {
-        assertPoint3dEquals("forward fails", f, t.forward(o));
-        assertPoint3dEquals("reverse fails", o, t.reverse(f));
+        assertPoint3dEquals("forward fails", f, o.transform(t));
+        assertPoint3dEquals("reverse fails", o, f.transform(t.invert()));
     }
 
     private void assertTransformWorks(Transform t, Normal3d o, Normal3d f) {
-        assertNormal3dEquals("forward fails", f, t.forward(o));
-        assertNormal3dEquals("reverse fails", o, t.reverse(f));
+        assertNormal3dEquals("forward fails", f, o.transform(t));
+        assertNormal3dEquals("reverse fails", o, f.transform(t.invert()));
     }
 
     private void assertNormal3dEquals(String message, Normal3d l, Normal3d r) {

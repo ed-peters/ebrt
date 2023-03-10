@@ -1,6 +1,7 @@
 package ebrt.interactions;
 
 import ebrt.math.Point3d;
+import ebrt.math.Transform;
 import ebrt.math.Vector3d;
 
 public record RayDifferential(
@@ -24,5 +25,19 @@ public record RayDifferential(
             return new RayDifferential(ray, true, ox, oy, dx, dy);
         }
         return this;
+    }
+
+    public RayDifferential transform(Transform t) {
+
+        Ray r = ray.transform(t);
+        if (!hasDifferentials) {
+            return new RayDifferential(r);
+        }
+
+        Point3d rox = originX.transform(t);
+        Point3d roy = originY.transform(t);
+        Vector3d rdx = directionX.transform(t);
+        Vector3d rdy = directionY.transform(t);
+        return new RayDifferential(r, true, rox, roy, rdx, rdy);
     }
 }
