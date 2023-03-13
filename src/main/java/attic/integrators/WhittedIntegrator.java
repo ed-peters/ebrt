@@ -58,7 +58,7 @@ public class WhittedIntegrator extends SamplerIntegrator {
 
         return l;
     }
-
+w
     private Color computeLightColor(Ray ray) {
         Color l = Color.BLACK;
         for (Light light : scene.lights) {
