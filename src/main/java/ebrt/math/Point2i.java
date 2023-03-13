@@ -36,6 +36,14 @@ public record Point2i(int x, int y) {
         return new Point2i(Math.max(x, other.x), Math.max(y, other.y));
     }
 
+    public Point2i abs() {
+        return new Point2i(Math.abs(x), Math.abs(y));
+    }
+
+    public Point2d toPoint2d() {
+        return new Point2d(x, y);
+    }
+
     public Point3d toPoint3d() {
         return toPoint3d(0);
     }
