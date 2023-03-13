@@ -19,7 +19,6 @@ public class PerspectiveCamera extends ProjectiveCamera {
 
     public PerspectiveCamera(
             Transform cameraToWorld,
-            Transform cameraToScreen,
             Bounds2d screenWindow,
             double lensRadius,
             double focalDistance,
