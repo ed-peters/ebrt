@@ -1,5 +1,7 @@
 package ebrt.math;
 
+import java.util.Arrays;
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 import static java.lang.Math.toRadians;
@@ -32,6 +34,15 @@ public record Transform(double [][] matrix, double [][] inverse) {
 
     public Transform andThen(Transform other) {
         return other.compose(this);
+    }
+
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i=0; i<4; i++) {
+            if (i > 0) builder.append("\n");
+            builder.append(Arrays.toString(matrix[i]));
+        }
+        return builder.toString();
     }
 
     public static Transform translate(double dx, double dy, double dz) {
@@ -126,5 +137,10 @@ public record Transform(double [][] matrix, double [][] inverse) {
 
     public static Transform from(double [][] matrix) {
         return new Transform(matrix, Matrix.invert(matrix));
+    }
+
+    public static void main(String [] args) {
+        Transform t = lookAt(Point3d.ORIGIN, new Point3d(0, 0, -1), Vector3d.Y);
+        System.err.println(t);
     }
 }
