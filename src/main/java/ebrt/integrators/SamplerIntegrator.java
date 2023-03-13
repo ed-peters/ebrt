@@ -1,16 +1,15 @@
-package attic.integrators;
+package ebrt.integrators;
 
 import ebrt.Color;
-import attic.Scene;
-import attic.camera.Camera;
-import attic.camera.Film;
-import attic.camera.FilmTile;
-import ebrt.interactions.SurfaceInteraction;
-import attic.math.Point2i;
-import attic.math.Ray;
-import attic.math.Weighted;
-import attic.samplers.CameraSample;
-import attic.samplers.Sampler;
+import ebrt.Scene;
+import ebrt.camera.Camera;
+import ebrt.camera.Film;
+import ebrt.camera.FilmTile;
+import ebrt.interactions.Ray;
+import ebrt.math.Point2i;
+import ebrt.math.Weighted;
+import ebrt.samplers.CameraSample;
+import ebrt.samplers.Sampler;
 
 public abstract class SamplerIntegrator implements Integrator {
 
@@ -22,13 +21,17 @@ public abstract class SamplerIntegrator implements Integrator {
         this.sampler = sampler;
     }
 
-    public abstract void preprocess(Scene scene, Sampler sampler);
+    protected void preprocess(Scene scene, Sampler sampler) {
+
+    }
 
     public abstract Color li(Ray ray, Scene scene, Sampler sampler, int depth);
 
+/*
     public abstract Color specularReflect(Ray ray, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
 
     public abstract Color specularTransmit(Ray ray, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
+*/
 
     @Override
     public void render(Scene scene, Film film) {

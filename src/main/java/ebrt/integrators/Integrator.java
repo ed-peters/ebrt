@@ -1,7 +1,7 @@
-package attic.integrators;
+package ebrt.integrators;
 
-import attic.Scene;
-import attic.camera.Film;
+import ebrt.Scene;
+import ebrt.camera.Film;
 
 public interface Integrator {
 
