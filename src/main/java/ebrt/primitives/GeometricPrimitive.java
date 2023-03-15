@@ -2,6 +2,7 @@ package ebrt.primitives;
 
 import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
+import ebrt.interactions.TransportMode;
 import ebrt.lights.AreaLight;
 import ebrt.material.Material;
 import ebrt.math.Bounds3d;
@@ -66,4 +67,10 @@ public class GeometricPrimitive implements Primitive {
         return si;
     }
 
+    @Override
+    public void computeScatteringFunctions(SurfaceInteraction interaction, boolean allowMultipleLobes, TransportMode mode) {
+        if (material != null) {
+            material.computeScatteringFunctions(interaction, allowMultipleLobes, mode);
+        }
+    }
 }

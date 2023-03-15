@@ -21,7 +21,7 @@ public final class TracerConfig {
     public double viewportWidth;
     public double focalLength = 1.0;
     public double fieldOfView = 90.0;
-    public double aperture = 2.0;
+    public double aperture = 0; // 2.0;
 
     public int samplesPerPixel = 5;
 
@@ -61,8 +61,8 @@ public final class TracerConfig {
 //                new Point2d(-screenWidth / 2, screenHeight / 2),
 //                new Point2d(screenWidth / 2, -screenHeight / 2));
         Bounds2d screenWindow = new Bounds2d(
-                new Point2d(0, 0),
-                new Point2d(screenWidth, screenHeight));
+                new Point2d(-screenWidth/2, screenHeight/2),
+                new Point2d(screenWidth/2, -screenHeight/2));
 
         // use simple lens model from RIOW to calculate from aperture
         double lensRadius = aperture / 2.0;

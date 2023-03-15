@@ -10,7 +10,6 @@ public interface Light {
 
 //    virtual Spectrum Sample_Li(const Interaction &ref, const Point2f &u,
 //                               Vector3f *wi, Float *pdf, VisibilityTester *vis) const = 0;
-    SampleResult sampleLi(SurfaceInteraction surfaceInteraction, Point2d u);
 
     Color le(Ray ray);
 

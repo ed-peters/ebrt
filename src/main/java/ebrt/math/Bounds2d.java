@@ -9,6 +9,22 @@ public record Bounds2d(Point2d min, Point2d max) {
         this.max = min.max(max);
     }
 
+    public double width() {
+        return max.x() - min.x();
+    }
+
+    public double height() {
+        return max.y() - min.y();
+    }
+
+    public double area() {
+        return width() * height();
+    }
+
+    public double aspectRatio() {
+        return width() / height();
+    }
+
     public Bounds2d mul(Point2d point) {
         return new Bounds2d(min.mul(point), max.mul(point));
     }

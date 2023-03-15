@@ -59,7 +59,7 @@ public class Tracer {
             }
         }
 
-        film.writeToFile(1.0, "/Users/ed.peters/Desktop/ebrt.png");
+        film.writeToFile(1.0, Computer.desktopFile("ebrt.png"));
     }
 
     public static void main(String [] args) {

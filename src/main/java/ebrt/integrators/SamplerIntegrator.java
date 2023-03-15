@@ -6,6 +6,8 @@ import ebrt.camera.Camera;
 import ebrt.camera.Film;
 import ebrt.camera.FilmTile;
 import ebrt.interactions.Ray;
+import ebrt.interactions.RayPack;
+import ebrt.math.Bounds2i;
 import ebrt.math.Point2i;
 import ebrt.math.Weighted;
 import ebrt.samplers.CameraSample;
@@ -25,12 +27,12 @@ public abstract class SamplerIntegrator implements Integrator {
 
     }
 
-    public abstract Color li(Ray ray, Scene scene, Sampler sampler, int depth);
+    public abstract Color li(RayPack rays, Scene scene, Sampler sampler, int depth);
 
 /*
-    public abstract Color specularReflect(Ray ray, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
+    public abstract Color specularReflect(RayPack rays, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
 
-    public abstract Color specularTransmit(Ray ray, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
+    public abstract Color specularTransmit(RayPack rays, SurfaceInteraction surfaceInteraction, Scene scene, Sampler sampler, int depth);
 */
 
     @Override
@@ -39,25 +41,35 @@ public abstract class SamplerIntegrator implements Integrator {
         preprocess(scene, sampler);
 
         FilmTile tile = film.makeTile(film.sampleBounds());
+        Bounds2i bounds = tile.bounds();
 
-        for (Point2i point : tile.bounds()) {
+        for (int x=bounds.min().x(); x<bounds.max().x(); x++) {
+            for (int y=bounds.min().y(); y<bounds.max().y(); y++) {
+                Point2i point = new Point2i(x, y);
+                renderPixel(scene, tile, point);
+            }
+        }
 
-            sampler.startPixel(point);
+        film.mergeTile(tile);
+    }
 
-            CameraSample sample = sampler.cameraSample();
-            Weighted<Ray> ray = camera.makeRay(sample);
-            // TODO scale ray differentials?
+    private void renderPixel(Scene scene, FilmTile tile, Point2i point) {
+
+        sampler.startPixel(point);
+
+        for (int p=0; p<sampler.samplesPerPixel(); p++) {
+
+            CameraSample sample = sampler.cameraSample(point);
+            Weighted<RayPack> rays = camera.makeRayPack(sample);
 
             Color l = Color.BLACK;
-            if (ray.weight() > 0) {
-                l = li(ray.t(), scene, sampler, 0);
+            if (rays.weight() > 0) {
+                l = li(rays.t(), scene, sampler, 0);
                 if (!l.isValid()) {
                     System.err.println("warning: invalid luminance at "+point);
                 }
             }
-            tile.addSample(sample.film(), l, ray.weight());
+            tile.addSample(sample.film(), l, rays.weight());
         }
-
-        film.mergeTile(tile);
     }
 }

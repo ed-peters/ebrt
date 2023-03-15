@@ -78,9 +78,6 @@ public record Color(double r, double g, double b) {
     }
 
     private double clean(double d) {
-        if (Double.isNaN(d)) {
-            System.err.println("oops!");
-        }
         return d;
     }
 

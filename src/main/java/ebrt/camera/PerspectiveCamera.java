@@ -1,7 +1,7 @@
 package ebrt.camera;
 
 import ebrt.interactions.Ray;
-import ebrt.interactions.RayDifferential;
+import ebrt.interactions.RayPack;
 import ebrt.math.Bounds2d;
 import ebrt.math.Point3d;
 import ebrt.math.Projections;
@@ -26,7 +26,13 @@ public class PerspectiveCamera extends ProjectiveCamera {
             Medium medium,
             Film film) {
 
-        super(cameraToWorld, Projections.perspective(fieldOfView), screenWindow, lensRadius, focalDistance, medium, film);
+        super(cameraToWorld,
+                Projections.perspective(fieldOfView, focalDistance, 1000),
+                screenWindow,
+                lensRadius,
+                focalDistance,
+                medium,
+                film);
 
         Vector3d o = Vector3d.ZERO.transform(rasterToCamera());
         Vector3d x = Vector3d.X.transform(rasterToCamera());
@@ -48,7 +54,7 @@ public class PerspectiveCamera extends ProjectiveCamera {
     }
 
     @Override
-    public Weighted<RayDifferential> makeRayDifferential(CameraSample sample) {
+    public Weighted<RayPack> makeRayPack(CameraSample sample) {
 
         RayParts parts = makeRayParts(sample);
         Vector3d dx = parts.camera().toVector3d().plus(cameraX).normalize();
@@ -73,7 +79,7 @@ public class PerspectiveCamera extends ProjectiveCamera {
             rdy = dy;
         }
 
-        RayDifferential rd = new RayDifferential(parts.ray(), true, rox, roy, rdx, rdy);
+        RayPack rd = new RayPack(parts.ray(), new Ray(rox, rdx), new Ray(roy, rdy));
         return new Weighted<>(rd.transform(cameraToWorld()), 1);
     }
 }

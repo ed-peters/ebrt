@@ -2,6 +2,7 @@ package ebrt.primitives;
 
 import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
+import ebrt.interactions.TransportMode;
 import ebrt.lights.AreaLight;
 import ebrt.material.Material;
 import ebrt.math.Bounds3d;
@@ -31,6 +32,11 @@ public class TransformedPrimitive implements Primitive {
     @Override
     public Material material() {
         return target.material();
+    }
+
+    @Override
+    public void computeScatteringFunctions(SurfaceInteraction interaction, boolean allowMultipleLobes, TransportMode mode) {
+        target.computeScatteringFunctions(interaction, allowMultipleLobes, mode);
     }
 
     @Override

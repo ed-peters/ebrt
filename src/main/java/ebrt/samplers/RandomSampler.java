@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RandomSampler implements Sampler {
 
     private final int samplesPerPixel;
+    private Point2i currentPixel;
 
     public RandomSampler(int samplesPerPixel) {
         this(samplesPerPixel, -1);
@@ -41,12 +42,15 @@ public class RandomSampler implements Sampler {
     }
 
     @Override
-    public CameraSample cameraSample() {
-        return new CameraSample(get2d(), get2d(), get1d());
+    public CameraSample cameraSample(Point2i raster) {
+        Point2d film = raster.plus(get2d());
+        Point2d lens = get2d();
+        double time = get1d();
+        return new CameraSample(film, lens, time);
     }
 
     @Override
     public void startPixel(Point2i pixel) {
-
+        currentPixel = pixel;
     }
 }

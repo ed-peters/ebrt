@@ -4,7 +4,7 @@ import ebrt.math.Bounds2i;
 import ebrt.math.Transform;
 import ebrt.math.Weighted;
 import ebrt.interactions.Ray;
-import ebrt.interactions.RayDifferential;
+import ebrt.interactions.RayPack;
 import ebrt.media.Medium;
 import ebrt.samplers.CameraSample;
 
@@ -38,7 +38,7 @@ public abstract class Camera {
 
     public abstract Weighted<Ray> makeRay(CameraSample sample);
 
-    public Weighted<RayDifferential> makeRayDifferential(CameraSample sample) {
+    public Weighted<RayPack> makeRayPack(CameraSample sample) {
         Weighted<Ray> ray = makeRay(sample);
         Weighted<Ray> rx = makeRay(sample.shift(1, 0));
         if (rx == null) {
@@ -48,20 +48,14 @@ public abstract class Camera {
         if (ry == null) {
             return null;
         }
-        RayDifferential rd = new RayDifferential(
-                ray.t(),
-                true,
-                rx.t().origin(),
-                ry.t().origin(),
-                rx.t().direction(),
-                ry.t().direction());
+        RayPack rd = new RayPack(ray.t(), rx.t(), ry.t());
         return new Weighted<>(rd, ray.weight());
     }
 
     /*
 
-        virtual Spectrum We(const Ray &ray, Point2f *pRaster2 = nullptr) const;
-       virtual void Pdf_We(const Ray &ray, Float *pdfPos, Float *pdfDir) const;
+        virtual Spectrum We(const Ray &primary, Point2f *pRaster2 = nullptr) const;
+       virtual void Pdf_We(const Ray &primary, Float *pdfPos, Float *pdfDir) const;
        virtual Spectrum Sample_Wi(const Interaction &ref, const Point2f &u,
                                   Vector3f *wi, Float *pdf, Point2f *pRaster,
                                   VisibilityTester *vis) const;

@@ -2,6 +2,7 @@ package ebrt.primitives;
 
 import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
+import ebrt.interactions.TransportMode;
 import ebrt.lights.AreaLight;
 import ebrt.material.Material;
 import ebrt.math.Bounds3d;
@@ -52,6 +53,11 @@ public class PrimitiveList implements Primitive {
         }
 
         return bestSi;
+    }
+
+    @Override
+    public void computeScatteringFunctions(SurfaceInteraction interaction, boolean allowMultipleLobes, TransportMode mode) {
+        throw new UnsupportedOperationException();
     }
 
     public static PrimitiveList from(Primitive... prim) {

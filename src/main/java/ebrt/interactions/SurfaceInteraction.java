@@ -1,6 +1,7 @@
 package ebrt.interactions;
 
 import ebrt.Color;
+import ebrt.lights.AreaLight;
 import ebrt.math.Normal3d;
 import ebrt.math.Point3d;
 import ebrt.math.Transform;
@@ -16,6 +17,7 @@ public final class SurfaceInteraction extends Interaction {
     public final Shape shape;
     private Primitive primitive;
     private Object bsdf;
+    private SurfaceDifferentials surfaceDiff;
 
     public SurfaceInteraction(
             Point3d point,
@@ -47,12 +49,26 @@ public final class SurfaceInteraction extends Interaction {
         this.bsdf = bsdf;
     }
 
-    public void computeScatteringFunctions(Ray ray) {
-        throw new UnsupportedOperationException();
+    public void computeDifferentials(RayPack rays) {
+        if (rays.hasDifferentials()) {
+            // https://pbr-book.org/3ed-2018/Texture/Sampling_and_Antialiasing#SurfaceInteraction::ComputeDifferentials
+            throw new UnsupportedOperationException();
+        } else {
+            surfaceDiff = SurfaceDifferentials.NONE;
+        }
+    }
+
+    public void computeScatteringFunctions(RayPack rays, boolean allowMultipleLobes, TransportMode mode) {
+        computeDifferentials(rays);
+        primitive.computeScatteringFunctions(this, allowMultipleLobes, mode);
     }
 
     public Color le(Vector3d wo) {
-        throw new UnsupportedOperationException();
+        AreaLight light = primitive.areaLight();
+        if (light != null) {
+            return light.le(wo);
+        }
+        return Color.BLACK;
     }
 
     public SurfaceInteraction transform(Transform t) {

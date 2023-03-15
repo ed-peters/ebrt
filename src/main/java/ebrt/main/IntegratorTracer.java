@@ -38,7 +38,7 @@ public class IntegratorTracer {
 
         integrator.render(scene, camera.film());
 
-        camera.film().writeToFile(1.0, "/Users/ed.peters/Desktop/ebrt.png");
+        camera.film().writeToFile(1.0, Computer.desktopFile("ebrt.png"));
     }
 
     public static void main(String [] args) {

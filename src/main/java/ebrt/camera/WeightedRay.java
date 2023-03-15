@@ -1,6 +1,6 @@
 package ebrt.camera;
 
-import ebrt.interactions.RayDifferential;
+import ebrt.interactions.RayPack;
 
-public record WeightedRay(RayDifferential ray, double weight) {
+public record WeightedRay(RayPack ray, double weight) {
 }

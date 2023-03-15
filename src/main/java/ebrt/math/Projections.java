@@ -29,13 +29,17 @@ public class Projections {
     }
 
     public static Transform perspective(double fieldOfView, double near, double far) {
+
         double x = far / (far - near);
-        double [][] m = new double[][]{
+        Transform t1 = Transform.from(new double[][]{
                 { 1, 0, 0, 0 },
                 { 0, 1, 0, 0 },
-                { 0, 0, x, -near * x },
-                { 0, 0, 1, 0 } };
+                { 0, 0, -x, -near * x },
+                { 0, 0, 1, 0 } });
+
         double invTanAng = 1 / Math.tan(Math.toRadians(fieldOfView) / 2);
-        return Transform.from(m).andThen(Transform.scale(invTanAng, invTanAng, 1));
+        Transform t2 = Transform.scale(invTanAng, invTanAng, 1);
+
+        return t1.andThen(t2);
     }
 }

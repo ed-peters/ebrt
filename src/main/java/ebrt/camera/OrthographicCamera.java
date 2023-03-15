@@ -1,7 +1,7 @@
 package ebrt.camera;
 
 import ebrt.interactions.Ray;
-import ebrt.interactions.RayDifferential;
+import ebrt.interactions.RayPack;
 import ebrt.math.Bounds2d;
 import ebrt.math.Point3d;
 import ebrt.math.Projections;
@@ -35,7 +35,7 @@ public class OrthographicCamera extends ProjectiveCamera {
     }
 
     @Override
-    public Weighted<RayDifferential> makeRayDifferential(CameraSample sample) {
+    public Weighted<RayPack> makeRayPack(CameraSample sample) {
 
         RayParts parts = makeRayParts(sample);
 
@@ -58,7 +58,7 @@ public class OrthographicCamera extends ProjectiveCamera {
             rdy = mainRay.direction();
         }
 
-        RayDifferential rd = new RayDifferential(parts.ray(), true, rox, roy, rdx, rdy);
+        RayPack rd = new RayPack(parts.ray(), new Ray(rox, rdx), new Ray(roy, rdy));
         return new Weighted<>(rd.transform(cameraToWorld()), 1);
     }
 }

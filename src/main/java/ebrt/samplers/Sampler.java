@@ -13,7 +13,7 @@ public interface Sampler {
 
     Point2d get2d();
 
-    CameraSample cameraSample();
+    CameraSample cameraSample(Point2i raster);
 
     void startPixel(Point2i pixel);
 }
