@@ -1,13 +1,19 @@
 package ebrt.main;
 
 import ebrt.Color;
+import ebrt.camera.Camera;
 import ebrt.camera.Film;
+import ebrt.camera.PerspectiveCamera;
+import ebrt.integrators.SamplerIntegrator;
 import ebrt.interactions.Ray;
 import ebrt.interactions.SurfaceInteraction;
+import ebrt.math.Bounds2d;
 import ebrt.math.Normal3d;
 import ebrt.math.Point2i;
 import ebrt.math.Point3d;
+import ebrt.math.Transform;
 import ebrt.math.Vector3d;
+import ebrt.media.Medium;
 import ebrt.primitives.GeometricPrimitive;
 import ebrt.primitives.Primitive;
 import ebrt.primitives.PrimitiveList;
@@ -46,7 +52,8 @@ public class Tracer {
 
     public void run() {
 
-        Film film = new Film(new Point2i(config.imageWidth, config.imageHeight));
+        Camera camera = config.makeCamera();
+        Film film = camera.film();
 
         for (int j=config.imageHeight-1; j>=0; j--) {
             for (int i=0; i<config.imageWidth; i++) {
