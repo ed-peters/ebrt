@@ -5,6 +5,7 @@ import ebrt.Scene;
 import ebrt.camera.Camera;
 import ebrt.interactions.RayPack;
 import ebrt.interactions.SurfaceInteraction;
+import ebrt.lights.Light;
 import ebrt.math.Normal3d;
 import ebrt.samplers.Sampler;
 
@@ -23,7 +24,14 @@ public class SimpleNormalColoredIntegrator extends SamplerIntegrator {
             return new Color(n.x() + 1, n.y() + 1, n.z() + 1).mul(0.5);
         }
 
-        double t = 0.5 * (rays.primary().direction().normalize().y() + 1.0);
-        return Color.WHITE.mul(1.0 - t).plus(Color.SKY_BLUE.mul(t));
+        return computeLightColor(rays, scene);
+    }
+
+    protected Color computeLightColor(RayPack rays, Scene scene) {
+        Color l = Color.BLACK;
+        for (Light light : scene.lights) {
+            l = l.plus(light.le(rays.primary()));
+        }
+        return l;
     }
 }

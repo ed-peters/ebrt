@@ -3,6 +3,7 @@ package ebrt.integrators;
 import ebrt.Color;
 import ebrt.Scene;
 import ebrt.camera.Camera;
+import ebrt.interactions.LightCastOnObject;
 import ebrt.interactions.RayPack;
 import ebrt.interactions.SurfaceInteraction;
 import ebrt.interactions.TransportMode;
@@ -51,6 +52,24 @@ public class WhittedIntegrator extends SamplerIntegrator {
 
     // https://pbr-book.org/3ed-2018/Introduction/pbrt_System_Overview#fragment-Addcontributionofeachlightsource-0
     protected Color computeLightSourceContributions(RayPack rays, SurfaceInteraction interaction, Scene scene, Sampler sampler) {
+        Color color = Color.BLACK;
+        for (Light light : scene.lights) {
+            LightCastOnObject cast = light.li(interaction, sampler.get2d());
+            if (cast.color().isBlack() || cast.pdf() == 0) {
+                continue;
+            }
+            // WTF is wi?
+            // WTF is Li?
+            Color f = interaction.bsdf().f(interaction.wo, interaction.normal);
+            if (!f.isBlack() && cast.tester().unoccluded(scene)) {
+
+            }
+            if (!f.IsBlack() && visibility.Unoccluded(scene)) {
+                color = color.plus(f.mul(li).mul(interaction.normal.abs))
+            }
+        }
+
+
         return Color.BLACK;
     }
 

@@ -2,6 +2,7 @@ package ebrt.interactions;
 
 import ebrt.Color;
 import ebrt.lights.AreaLight;
+import ebrt.material.BXDF;
 import ebrt.math.Normal3d;
 import ebrt.math.Point3d;
 import ebrt.math.Transform;
@@ -16,7 +17,7 @@ public final class SurfaceInteraction extends Interaction {
 
     public final Shape shape;
     private Primitive primitive;
-    private Object bsdf;
+    private BXDF bsdf;
     private SurfaceDifferentials surfaceDiff;
 
     public SurfaceInteraction(
@@ -37,7 +38,7 @@ public final class SurfaceInteraction extends Interaction {
         return primitive;
     }
 
-    public Object bsdf() {
+    public BXDF bsdf() {
         return bsdf;
     }
 
@@ -45,14 +46,14 @@ public final class SurfaceInteraction extends Interaction {
         this.primitive = primitive;
     }
 
-    public void setBsdf(Object bsdf) {
+    public void setBsdf(BXDF bsdf) {
         this.bsdf = bsdf;
     }
 
     public void computeDifferentials(RayPack rays) {
         if (rays.hasDifferentials()) {
+            System.err.println("TODO: SurfaceInteraction.computeDifferentials");
             // https://pbr-book.org/3ed-2018/Texture/Sampling_and_Antialiasing#SurfaceInteraction::ComputeDifferentials
-            throw new UnsupportedOperationException();
         } else {
             surfaceDiff = SurfaceDifferentials.NONE;
         }

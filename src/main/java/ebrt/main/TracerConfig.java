@@ -12,6 +12,8 @@ import ebrt.math.Vector3d;
 
 public final class TracerConfig {
 
+    public int maxDepth;
+
     public double aspectRatio = 1.0;
 
     public int imageWidth = 400;
